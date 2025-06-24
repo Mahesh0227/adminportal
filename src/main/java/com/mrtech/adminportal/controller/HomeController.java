@@ -14,10 +14,10 @@ public class HomeController {
         return "home"; // maps to templates/home.html
     }
 
-    @GetMapping("/dashboard1")
-    public String dashboard1(Model model, HttpSession session) {
-        return "dashboard"; // refers to templates/dashboard.html
-    }
+  //  @GetMapping("/dashboard1")
+  //  public String dashboard1(Model model, HttpSession session) {
+   //     return "dashboard"; // refers to templates/dashboard.html
+  //  }
     
     @GetMapping("/dashboard")
     public String dashboard(Model model, HttpSession session) {
