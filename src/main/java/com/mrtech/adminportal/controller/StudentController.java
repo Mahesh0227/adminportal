@@ -1,6 +1,7 @@
 package com.mrtech.adminportal.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,5 +44,31 @@ public class StudentController {
         studentRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<Student> getStudentById(@PathVariable int id) {
+        Optional<Student> student = studentRepository.findById(id);
+        return student.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
+    
+    @PutMapping("/{id}")
+    public ResponseEntity<Student> updateStudent(@PathVariable int id, @RequestBody Student updatedData) {
+        return studentRepository.findById(id).map(existing -> {
+            existing.setName(updatedData.getName());
+            existing.setEmail(updatedData.getEmail());
+            existing.setMobile(updatedData.getMobile());
+            existing.setDob(updatedData.getDob());
+            existing.setGender(updatedData.getGender());
+            existing.setAddress(updatedData.getAddress());
+            existing.setQualification(updatedData.getQualification());
+            existing.setCourse(updatedData.getCourse());
+            existing.setDuration(updatedData.getDuration());
+            existing.setJoiningDate(updatedData.getJoiningDate());
+            studentRepository.save(existing);
+            return ResponseEntity.ok(existing);
+        }).orElse(ResponseEntity.notFound().build());
+    }
+
+
 }
 

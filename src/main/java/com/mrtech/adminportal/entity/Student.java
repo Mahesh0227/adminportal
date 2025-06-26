@@ -19,7 +19,8 @@ public class Student {
     private String gender;
     private String address;
     private String course;
-    private String duration;
+    private String qualification;
+	private String duration;
     private String joiningDate;
     // Getters and Setters
 
@@ -86,6 +87,14 @@ public class Student {
     public void setCourse(String course) {
         this.course = course;
     }
+    
+    public String getQualification() {
+		return qualification;
+	}
+
+	public void setQualification(String qualification) {
+		this.qualification = qualification;
+	}
 
     public String getDuration() {
         return duration;
