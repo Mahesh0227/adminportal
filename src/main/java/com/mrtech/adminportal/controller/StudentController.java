@@ -32,6 +32,11 @@ public class StudentController {
         return new ResponseEntity<>(studentRepository.save(student), HttpStatus.CREATED);
     }
     
+    @GetMapping("/getstudents")
+    public List<Student> getAllStudents() {
+        return studentRepository.findAll();
+    }
+    
     @GetMapping("/search")
     @CrossOrigin(origins = "*")
     public ResponseEntity<List<Student>> searchStudents(@RequestParam("keyword") String keyword) {
